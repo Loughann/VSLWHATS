@@ -211,8 +211,108 @@ h2.card-title.font-bold.text-2xl {
         
 <!--<div id="vid_681944d8c8c4104a93a7b866" style="position: relative; width: 100%; padding: 56.25% 0 0;"> <img id="thumb_681944d8c8c4104a93a7b866" src="https://images.converteai.net/7f6e5dcf-2c9b-4d63-afec-45570abbe391/players/681944d8c8c4104a93a7b866/thumbnail.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: block;" alt="thumbnail"> <div id="backdrop_681944d8c8c4104a93a7b866" style=" -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); position: absolute; top: 0; height: 100%; width: 100%; "></div> </div> <script type="text/javascript" id="scr_681944d8c8c4104a93a7b866"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/7f6e5dcf-2c9b-4d63-afec-45570abbe391/players/681944d8c8c4104a93a7b866/player.js", s.async=!0,document.head.appendChild(s); </script>
        --> 
-        
-<div style="position:relative;padding-top:56.25%;"><iframe id="panda-f5fe7793-a6d1-40af-9567-a45599fa9399" src="https://player.vimeo.com/video/1097730571?h=bd53fcce96" style="border:none;position:absolute;top:0;left:0;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen="true" width="100%" height="100%" fetchpriority="high"></iframe></div>
+ 
+       
+
+
+
+
+
+<style>
+  /* ANIMAÇÃO ISOLADA */
+  @keyframes vsl-pulse {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      box-shadow: 0 0 0 0 rgba(0, 204, 0, 0.7);
+    }
+    70% {
+      transform: translate(-50%, -50%) scale(1.05);
+      box-shadow: 0 0 0 15px rgba(0, 204, 0, 0);
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+      box-shadow: 0 0 0 0 rgba(0, 204, 0, 0);
+    }
+  }
+
+  .vsl-pulse-button {
+    animation: vsl-pulse 1.8s infinite;
+  }
+</style>
+
+<div style="position:relative;padding-top:56.25%;border-radius:15px;overflow:hidden;">
+
+  <!-- VIMEO IFRAME -->
+  <iframe 
+    id="vsl-video"
+    src="https://player.vimeo.com/video/1097730571?h=bd53fcce96&autoplay=0&muted=1&playsinline=1" 
+    style="border:none;position:absolute;top:0;left:0;" 
+    allow="autoplay; fullscreen" 
+    allowfullscreen 
+    width="100%" 
+    height="100%">
+  </iframe>
+
+  <!-- BLOQUEADOR DE TOQUE DUPLO -->
+  <div 
+    id="vsl-tap-blocker"
+    style="
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      z-index:5;
+    "
+    ontouchstart="event.preventDefault();" 
+    ontouchend="event.preventDefault();"
+    onclick="event.stopPropagation();">
+  </div>
+
+  <!-- BOTÃO PULSANTE PARA ATIVAR SOM -->
+  <div 
+    id="vsl-play-overlay"
+    onclick="vslAtivarVideoComSom()"
+    class="vsl-pulse-button"
+    style="
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #00cc00;
+      color: white;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+      padding: 20px 30px;
+      border-radius: 12px;
+      text-align: center;
+      cursor: pointer;
+      z-index: 10;
+    ">
+    TOQUE PARA ATIVAR O SOM
+  </div>
+
+</div>
+
+<script>
+  function vslAtivarVideoComSom() {
+    const overlay = document.getElementById('vsl-play-overlay');
+    const iframe = document.getElementById('vsl-video');
+
+    overlay.style.display = 'none';
+
+    const novoSrc = "https://player.vimeo.com/video/1097730571?h=bd53fcce96&autoplay=1&muted=0&playsinline=1#t=0s";
+    iframe.src = novoSrc;
+  }
+</script>
+
+
+
+
+
+
+
 
 
 
