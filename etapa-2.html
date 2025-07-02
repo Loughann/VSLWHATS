@@ -202,47 +202,102 @@ h2.card-title.font-bold.text-2xl {
       </div>  -->
 
  
+
+
+<style>
+  /* ANIMAÇÃO DE PULSAÇÃO */
+  @keyframes pulse {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      box-shadow: 0 0 0 0 rgba(0, 204, 0, 0.7);
+    }
+    70% {
+      transform: translate(-50%, -50%) scale(1.05);
+      box-shadow: 0 0 0 15px rgba(0, 204, 0, 0);
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+      box-shadow: 0 0 0 0 rgba(0, 204, 0, 0);
+    }
+  }
+
+  .pulse-button {
+    animation: pulse 1.8s infinite;
+  }
+</style>
+
 <div style="position:relative;padding-top:56.25%;border-radius:15px;overflow:hidden;">
-  <!-- IFRAME DO VÍDEO -->
+
+  <!-- VIMEO IFRAME -->
   <iframe 
-    id="panda-83054b2b-1e97-462c-95fe-8431c95885a5" 
-    src="https://player.vimeo.com/video/1097730571?h=bd53fcce96" 
+    id="vsl-video"
+    src="https://player.vimeo.com/video/1097730571?autoplay=0&muted=1&playsinline=1" 
     style="border:none;position:absolute;top:0;left:0;" 
-    allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" 
-    allowfullscreen="true" 
+    allow="autoplay; fullscreen" 
+    allowfullscreen 
     width="100%" 
-    height="100%" 
-    fetchpriority="high">
+    height="100%">
   </iframe>
 
-  <!-- BOTÃO DE ATIVAR SOM -->
+  <!-- CAMADA BLOQUEADORA DE TOQUE DUPLO -->
   <div 
-    onclick="ativarSom()" 
+    id="tap-blocker"
+    style="
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      z-index:5;
+    "
+    ontouchstart="event.preventDefault();" 
+    ontouchend="event.preventDefault();"
+    onclick="event.stopPropagation();">
+  </div>
+
+  <!-- BOTÃO PULSANTE PARA ATIVAR SOM -->
+  <div 
+    id="play-overlay"
+    onclick="ativarVideoComSom()"
+    class="pulse-button"
     style="
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       background-color: #00cc00;
-      border-radius: 50%;
-      padding: 30px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
       color: white;
-      text-align: center;
-      font-family: Arial, sans-serif;
       font-weight: bold;
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+      padding: 20px 30px;
+      border-radius: 12px;
+      text-align: center;
       cursor: pointer;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
       z-index: 10;
     ">
-    <div style="font-size:14px;">Clique aqui</div>
-    <img src="/caminho/para/imagem.png" alt="Ativar som" style="width:40px;height:auto;margin:5px 0;" />
-    <div style="font-size:14px;">para ativar o som</div>
+    TOQUE PARA ATIVAR O SOM
   </div>
+
 </div>
+
+<script>
+  function ativarVideoComSom() {
+    const overlay = document.getElementById('play-overlay');
+    const iframe = document.getElementById('vsl-video');
+
+    // Esconde o botão pulsante
+    overlay.style.display = 'none';
+
+    // Recarrega o vídeo com som ativado
+    const videoId = "1097730571";
+    const autoplayUrl = `https://player.vimeo.com/video/${videoId}?autoplay=1&muted=0&playsinline=1#t=0s`;
+    iframe.src = autoplayUrl;
+  }
+</script>
+
+
+
       
 
 
