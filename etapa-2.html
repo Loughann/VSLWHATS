@@ -201,18 +201,91 @@ h2.card-title.font-bold.text-2xl {
         <div style="position:absolute;top:0;width:100%;height:100%;-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px); background: #000; border-radius: 10px;"></div> 
       </div>  -->
 
-    <div style="position:relative;padding-top:56.25%;border-radius: 15px;overflow: hidden;">
-  <iframe 
-    id="panda-83054b2b-1e97-462c-95fe-8431c95885a5" 
-    src="https://player.vimeo.com/video/1097730571?h=bd53fcce96&autoplay=1&muted=1&title=0&byline=0&portrait=0" 
-    style="border:none;position:absolute;top:0;left:0;width:100%;height:100%;" 
-    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
-    allowfullscreen 
-    fetchpriority="high">
-  </iframe>
-</div>
-<script src="https://player.vimeo.com/api/player.js"></script>
+<style>
+  /* Container responsivo para vídeo 16:9 com bordas arredondadas */
+  #video-container {
+    position: relative;
+    padding-top: 56.25%;
+    border-radius: 15px;
+    overflow: hidden;
+    max-width: 100%;
+  }
 
+  /* iframe do Vimeo com interação bloqueada para não pausar */
+  #my-video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+    pointer-events: none; /* bloqueia toque para pausar no mobile */
+  }
+
+  /* Barra de progresso estilizada */
+  #progress-bar {
+    position: absolute;
+    bottom: 8px;
+    left: 5%;
+    width: 90%;
+    height: 6px;
+    background: #ddd;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  /* Barra interna animada */
+  #progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #4caf50, #81c784);
+    border-radius: 3px;
+    transition: width 0.15s linear;
+  }
+</style>
+
+<div id="video-container">
+  <iframe 
+    id="my-video" 
+    src="https://player.vimeo.com/video/1097730571?h=bd53fcce96&autoplay=1&muted=1&controls=0&title=0&byline=0&portrait=0" 
+    allow="autoplay; fullscreen; picture-in-picture" 
+    allowfullscreen 
+  ></iframe>
+
+  <div id="progress-bar">
+    <div id="progress-fill"></div>
+  </div>
+</div>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script>
+  const iframe = document.getElementById('my-video');
+  const player = new Vimeo.Player(iframe);
+  const progressFill = document.getElementById('progress-fill');
+
+  // Se o usuário tentar pausar, forçamos o play (backup)
+  player.on('pause', () => player.play());
+
+  player.on('timeupdate', (data) => {
+    const duration = data.duration;
+    const current = data.seconds;
+
+    let progress = current / duration;
+
+    if (progress < 0.5) {
+      // Progressão rápida nos primeiros 50%
+      progress = progress * 2; // normaliza 0-0.5 para 0-1
+    } else {
+      // Desacelera após metade do vídeo
+      const overHalf = (progress - 0.5) * 2; // 0 a 1
+      progress = 1 - (1 - overHalf) ** 2 * 0.5; // desaceleração suave
+    }
+
+    // Atualiza a barra, limitando entre 0 e 100%
+    progressFill.style.width = Math.min(progress * 100, 100) + '%';
+  });
+
+  // Garantir que o vídeo comece tocando
+  player.play();
+</script>
 
 
 <style type="text/css">
