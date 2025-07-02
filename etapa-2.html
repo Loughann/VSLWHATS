@@ -205,7 +205,6 @@ h2.card-title.font-bold.text-2xl {
 
 
 <style>
-  /* ANIMAÇÃO DE PULSAÇÃO */
   @keyframes pulse {
     0% {
       transform: translate(-50%, -50%) scale(1);
@@ -228,10 +227,10 @@ h2.card-title.font-bold.text-2xl {
 
 <div style="position:relative;padding-top:56.25%;border-radius:15px;overflow:hidden;">
 
-  <!-- VIMEO IFRAME -->
+  <!-- VIMEO IFRAME COM TOKEN -->
   <iframe 
     id="vsl-video"
-    src="https://player.vimeo.com/video/1097730571?autoplay=0&muted=1&playsinline=1" 
+    src="https://player.vimeo.com/video/1097730571?h=bd53fcce96&autoplay=0&muted=1&playsinline=1" 
     style="border:none;position:absolute;top:0;left:0;" 
     allow="autoplay; fullscreen" 
     allowfullscreen 
@@ -239,7 +238,7 @@ h2.card-title.font-bold.text-2xl {
     height="100%">
   </iframe>
 
-  <!-- CAMADA BLOQUEADORA DE TOQUE DUPLO -->
+  <!-- BLOQUEADOR DE TOQUE DUPLO -->
   <div 
     id="tap-blocker"
     style="
@@ -286,13 +285,11 @@ h2.card-title.font-bold.text-2xl {
     const overlay = document.getElementById('play-overlay');
     const iframe = document.getElementById('vsl-video');
 
-    // Esconde o botão pulsante
     overlay.style.display = 'none';
 
-    // Recarrega o vídeo com som ativado
-    const videoId = "1097730571";
-    const autoplayUrl = `https://player.vimeo.com/video/${videoId}?autoplay=1&muted=0&playsinline=1#t=0s`;
-    iframe.src = autoplayUrl;
+    // Substitui o src para autoplay com som, reiniciando o vídeo
+    const novoSrc = "https://player.vimeo.com/video/1097730571?h=bd53fcce96&autoplay=1&muted=0&playsinline=1#t=0s";
+    iframe.src = novoSrc;
   }
 </script>
 
