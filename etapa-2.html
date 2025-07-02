@@ -205,7 +205,8 @@ h2.card-title.font-bold.text-2xl {
 
 
 <style>
-  @keyframes pulse {
+  /* ANIMAÇÃO ISOLADA */
+  @keyframes vsl-pulse {
     0% {
       transform: translate(-50%, -50%) scale(1);
       box-shadow: 0 0 0 0 rgba(0, 204, 0, 0.7);
@@ -220,14 +221,14 @@ h2.card-title.font-bold.text-2xl {
     }
   }
 
-  .pulse-button {
-    animation: pulse 1.8s infinite;
+  .vsl-pulse-button {
+    animation: vsl-pulse 1.8s infinite;
   }
 </style>
 
 <div style="position:relative;padding-top:56.25%;border-radius:15px;overflow:hidden;">
 
-  <!-- VIMEO IFRAME COM TOKEN -->
+  <!-- VIMEO IFRAME -->
   <iframe 
     id="vsl-video"
     src="https://player.vimeo.com/video/1097730571?h=bd53fcce96&autoplay=0&muted=1&playsinline=1" 
@@ -240,7 +241,7 @@ h2.card-title.font-bold.text-2xl {
 
   <!-- BLOQUEADOR DE TOQUE DUPLO -->
   <div 
-    id="tap-blocker"
+    id="vsl-tap-blocker"
     style="
       position:absolute;
       top:0;
@@ -256,9 +257,9 @@ h2.card-title.font-bold.text-2xl {
 
   <!-- BOTÃO PULSANTE PARA ATIVAR SOM -->
   <div 
-    id="play-overlay"
-    onclick="ativarVideoComSom()"
-    class="pulse-button"
+    id="vsl-play-overlay"
+    onclick="vslAtivarVideoComSom()"
+    class="vsl-pulse-button"
     style="
       position: absolute;
       top: 50%;
@@ -281,13 +282,12 @@ h2.card-title.font-bold.text-2xl {
 </div>
 
 <script>
-  function ativarVideoComSom() {
-    const overlay = document.getElementById('play-overlay');
+  function vslAtivarVideoComSom() {
+    const overlay = document.getElementById('vsl-play-overlay');
     const iframe = document.getElementById('vsl-video');
 
     overlay.style.display = 'none';
 
-    // Substitui o src para autoplay com som, reiniciando o vídeo
     const novoSrc = "https://player.vimeo.com/video/1097730571?h=bd53fcce96&autoplay=1&muted=0&playsinline=1#t=0s";
     iframe.src = novoSrc;
   }
