@@ -201,7 +201,49 @@ h2.card-title.font-bold.text-2xl {
         <div style="position:absolute;top:0;width:100%;height:100%;-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px); background: #000; border-radius: 10px;"></div> 
       </div>  -->
 
-    <div style="position:relative;padding-top:56.25%;border-radius: 15px;overflow: hidden;"><iframe id="panda-83054b2b-1e97-462c-95fe-8431c95885a5" src="https://player.vimeo.com/video/1097730571?h=bd53fcce96" style="border:none;position:absolute;top:0;left:0;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen="true" width="100%" height="100%" fetchpriority="high"></iframe></div>
+ 
+<div style="position:relative;padding-top:56.25%;border-radius:15px;overflow:hidden;">
+  <!-- IFRAME DO VÍDEO -->
+  <iframe 
+    id="panda-83054b2b-1e97-462c-95fe-8431c95885a5" 
+    src="https://player.vimeo.com/video/1097730571?h=bd53fcce96" 
+    style="border:none;position:absolute;top:0;left:0;" 
+    allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" 
+    allowfullscreen="true" 
+    width="100%" 
+    height="100%" 
+    fetchpriority="high">
+  </iframe>
+
+  <!-- BOTÃO DE ATIVAR SOM -->
+  <div 
+    onclick="ativarSom()" 
+    style="
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #00cc00;
+      border-radius: 50%;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      z-index: 10;
+    ">
+    <div style="font-size:14px;">Clique aqui</div>
+    <img src="/caminho/para/imagem.png" alt="Ativar som" style="width:40px;height:auto;margin:5px 0;" />
+    <div style="font-size:14px;">para ativar o som</div>
+  </div>
+</div>
+      
 
 
 <style type="text/css">
